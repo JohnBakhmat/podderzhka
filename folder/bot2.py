@@ -21,7 +21,7 @@ import orm
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=bot_settings.BOT_TOKEN, parse_mode="MARKDOWN_V2")
+bot = Bot(token=bot_settings.BOT_TOKEN, parse_mode="MARKDOWNV2")
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
@@ -57,8 +57,8 @@ async def set_default_commands(dp):
         ]
     )
 
-GROUP_CHAT_ID = -4719535439
-GROUP2 = -4634508702
+ISSUE_CHAT_ID = -4719535439
+FEEDBACK_CHAT_ID = -4634508702
 active_chat_processing = False
 
 
@@ -227,7 +227,7 @@ async def receive_problem(message: types.Message, state: FSMContext):
     # Отправка сообщения в общий чат
     try:
         await bot.send_message(
-            chat_id=GROUP_CHAT_ID,
+            chat_id=ISSUE_CHAT_ID,
             text=f"🔔*Новая проблема в поддержке*\n\n"
                  f"*Дата:* {current_date}\n"
                  f"*Время:* {current_time}\n"
@@ -297,7 +297,7 @@ async def receive_problem(message: types.Message, state: FSMContext):
     # Отправка сообщения в общий чат
     try:
         await bot.send_message(
-            chat_id=GROUP2,
+            chat_id=FEEDBACK_CHAT_ID,
             text=f"🔔*Новый отзыв в поддержке*\n\n"
                  f"*Дата:* {current_date}\n"
                  f"*Время:* {current_time}\n"
